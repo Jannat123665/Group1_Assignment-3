@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtjel0b6hp2pa"]
+[gd_scene load_steps=4 format=3 uid="uid://dtjel0b6hp2pa"]
+
+[ext_resource type="Script" path="res://double_pendulum_3d.gd" id="1_ssp5r"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1h5y7"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_astre"]
 
-[node name="DoublePendulum3d" type="Node2D"]
+[node name="DoublePendulum3d" type="Node3D"]
+script = ExtResource("1_ssp5r")
 
 [node name="Arm1" type="Node3D" parent="."]
 
@@ -27,3 +30,9 @@ mesh = SubResource("CylinderMesh_1h5y7")
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.301698, 0)
 mesh = SubResource("SphereMesh_astre")
 skeleton = NodePath("")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.571424, 2.78699)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.571424, 2.78699)
