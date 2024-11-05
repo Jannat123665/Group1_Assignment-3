@@ -10,29 +10,31 @@
 script = ExtResource("1_ssp5r")
 
 [node name="Arm1" type="Node3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.000650167, 0, 0.00123072)
 
 [node name="String1" type="MeshInstance3D" parent="Arm1"]
 transform = Transform3D(0.005, 0, 0, 0, 0.2, 0, 0, 0, 0.005, 0.0012877, 1.00256, -0.000618279)
 mesh = SubResource("CylinderMesh_1h5y7")
 
-[node name="Bob2" type="MeshInstance3D" parent="Arm1"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.767384, 0)
+[node name="Bob2" type="MeshInstance3D" parent="Arm1/String1"]
+transform = Transform3D(20, 0, 0, 0, 0.5, 0, 0, 0, 20, -0.25754, -1.17588, 0.123656)
 mesh = SubResource("SphereMesh_astre")
 skeleton = NodePath("")
 
-[node name="Arm2" type="Node3D" parent="."]
+[node name="Arm2" type="Node3D" parent="Arm1/String1/Bob2"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0.0101201, -7.69395, 0.000103315)
 
-[node name="String1" type="MeshInstance3D" parent="Arm2"]
-transform = Transform3D(0.005, 0, 0, 0, 0.2, 0, 0, 0, 0.005, 0.0012877, 0.536875, -0.000618279)
+[node name="String1" type="MeshInstance3D" parent="Arm1/String1/Bob2/Arm2"]
+transform = Transform3D(0.005, 0, 0, 0, 0.2, 0, 0, 0, 0.005, 0.00154297, 0.551972, -0.00151759)
 mesh = SubResource("CylinderMesh_1h5y7")
 
-[node name="Bob2" type="MeshInstance3D" parent="Arm2"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.301698, 0)
+[node name="Bob2" type="MeshInstance3D" parent="Arm1/String1/Bob2/Arm2/String1"]
+transform = Transform3D(20, 0, 0, 0, 0.5, 0, 0, 0, 20, -0.25754, -1.17589, 0.123656)
 mesh = SubResource("SphereMesh_astre")
 skeleton = NodePath("")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.571424, 2.78699)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.571424, 4.32495)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.571424, 2.78699)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.571424, 4.32495)
