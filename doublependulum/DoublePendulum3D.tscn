@@ -16,20 +16,20 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.000650167, 0, 0.00123072)
 transform = Transform3D(0.005, 0, 0, 0, 0.2, 0, 0, 0, 0.005, 0.0012877, 1.00256, -0.000618279)
 mesh = SubResource("CylinderMesh_1h5y7")
 
-[node name="Bob2" type="MeshInstance3D" parent="Arm1/String1"]
-transform = Transform3D(20, 0, 0, 0, 0.5, 0, 0, 0, 20, -0.25754, -1.17588, 0.123656)
+[node name="Bob2" type="MeshInstance3D" parent="Arm1"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 8.73115e-11, 0.767384, 1.01863e-09)
 mesh = SubResource("SphereMesh_astre")
 skeleton = NodePath("")
 
-[node name="Arm2" type="Node3D" parent="Arm1/String1/Bob2"]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0.0101201, -7.69395, 0.000103315)
+[node name="Arm2" type="Node3D" parent="Arm1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00101201, -0.00201106, 1.03325e-05)
 
-[node name="String1" type="MeshInstance3D" parent="Arm1/String1/Bob2/Arm2"]
+[node name="String1" type="MeshInstance3D" parent="Arm1/Arm2"]
 transform = Transform3D(0.005, 0, 0, 0, 0.2, 0, 0, 0, 0.005, 0.00154297, 0.551972, -0.00151759)
 mesh = SubResource("CylinderMesh_1h5y7")
 
-[node name="Bob2" type="MeshInstance3D" parent="Arm1/String1/Bob2/Arm2/String1"]
-transform = Transform3D(20, 0, 0, 0, 0.5, 0, 0, 0, 20, -0.25754, -1.17589, 0.123656)
+[node name="Bob2" type="MeshInstance3D" parent="Arm1/Arm2"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00025527, 0.316794, -0.00089931)
 mesh = SubResource("SphereMesh_astre")
 skeleton = NodePath("")
 
