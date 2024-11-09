@@ -23,7 +23,6 @@ func _ready():
 	arm2 = $Arm1/Arm2/String1
 	bob2 = $Arm1/Arm2/Bob2
 
-	
 	if arm1 == null or bob1 == null or arm2 == null or bob2 == null:
 		print("Error: One or more nodes are not assigned correctly.")
 		return
@@ -50,23 +49,21 @@ func _physics_process(delta):
 	angle1 += angle1_velocity * delta
 	angle2 += angle2_velocity * delta
 
-	# 
 	update_pendulum_positions()
 
 func update_pendulum_positions():
 
+	# Calculate bob1 position
 	var bob1_position = Vector3(length1 * sin(angle1), -length1 * cos(angle1), 0)
 	bob1.global_transform.origin = arm1.global_transform.origin + bob1_position
 
-	
-	arm1.look_at(bob1.global_transform.origin, Vector3(1, 1, 1))
+	# Keep arm1 horizontal (along the X-axis) with angle1
+	arm1.rotation = Vector3(0, 0, angle1) # Arm 1 rotation remains horizontal
 
-	
+	# Calculate bob2 position
 	arm2.global_transform.origin = bob1.global_transform.origin
-
-	
 	var bob2_position = Vector3(length2 * sin(angle2), -length2 * cos(angle2), 0)
 	bob2.global_transform.origin = arm2.global_transform.origin + bob2_position
 
-	
-	arm2.look_at(bob2.global_transform.origin, Vector3(1, 1, 1))
+	# Keep arm2 horizontal (along the X-axis) with angle2
+	arm2.rotation = Vector3(0, 0, angle2) # Arm 2 rotation remains horizontal based on angle2
