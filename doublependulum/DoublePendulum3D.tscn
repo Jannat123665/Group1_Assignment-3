@@ -21,20 +21,21 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 8.73115e-11, 0.767384, 
 mesh = SubResource("SphereMesh_astre")
 skeleton = NodePath("")
 
-[node name="Arm2" type="Node3D" parent="Arm1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00101201, -0.00201106, 1.03325e-05)
-
-[node name="String1" type="MeshInstance3D" parent="Arm1/Arm2"]
-transform = Transform3D(0.005, 0, 0, 0, 0.2, 0, 0, 0, 0.005, 0.00154297, 0.551972, -0.00151759)
-mesh = SubResource("CylinderMesh_1h5y7")
-
-[node name="Bob2" type="MeshInstance3D" parent="Arm1/Arm2"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00025527, 0.316794, -0.00089931)
-mesh = SubResource("SphereMesh_astre")
-skeleton = NodePath("")
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.571424, 4.32495)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.571424, 4.32495)
+
+[node name="Arm2" type="Node3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.00238586, -0.00603318, 0.00126172)
+
+[node name="String2" type="MeshInstance3D" parent="Arm2"]
+transform = Transform3D(0.005, 0, 0, 0, 0.2, 0, 0, 0, 0.005, 0.00154297, 0.551972, -0.00151759)
+sorting_use_aabb_center = false
+mesh = SubResource("CylinderMesh_1h5y7")
+
+[node name="Bob2" type="MeshInstance3D" parent="Arm2"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00025527, 0.316794, -0.00089931)
+mesh = SubResource("SphereMesh_astre")
+skeleton = NodePath("")
