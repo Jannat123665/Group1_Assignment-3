@@ -1,7 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://dtjel0b6hp2pa"]
+[gd_scene load_steps=20 format=3 uid="uid://dtjel0b6hp2pa"]
 
 [ext_resource type="Script" path="res://double_pendulum_3d.gd" id="1_ssp5r"]
 [ext_resource type="Texture2D" uid="uid://cp3ox54kxp7ny" path="res://vintage_measuring_lab_4k.exr" id="2_d2kf7"]
+[ext_resource type="Script" path="res://moving_cam.gd" id="3_53nmh"]
+[ext_resource type="Script" path="res://camera_select.gd" id="3_ujkjq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nialq"]
 albedo_color = Color(0.956148, 0.727423, 0.925723, 1)
@@ -43,6 +45,15 @@ sky_material = SubResource("PanoramaSkyMaterial_ff663")
 background_mode = 2
 sky = SubResource("Sky_haybp")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uyomd"]
+render_priority = 3
+transparency = 1
+albedo_color = Color(0.192681, 0.286935, 0.414486, 0.662745)
+metallic = 0.43
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dbty3"]
+material = SubResource("StandardMaterial3D_uyomd")
+
 [node name="DoublePendulum3d" type="Node3D"]
 script = ExtResource("1_ssp5r")
 
@@ -68,9 +79,6 @@ mesh = SubResource("SphereMesh_yeupg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00463247, 0)
 node_a = NodePath("..")
 node_b = NodePath("../../../Arm2/String2")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.0718628, 0, -0.997415, 0, 1, 0, 0.997415, 0, 0.0718628, -2.95006, 2.14799, 1.10596)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.571424, 4.32495)
@@ -105,3 +113,31 @@ environment = SubResource("Environment_lbm7i")
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.340423, 0.403167, -0.849452, 0.0532692, 0.89369, 0.445511, 0.938762, -0.196912, 0.282757, -6.76325, 5.34435, 1.84863)
+
+[node name="Ufo" type="CharacterBody3D" parent="."]
+
+[node name="CameraSelect" type="Node3D" parent="."]
+transform = Transform3D(0.986115, 0, 0.166063, 0, 1, 0, -0.166063, 0, 0.986115, 1.58501, 2.15531, 1.35115)
+script = ExtResource("3_ujkjq")
+
+[node name="StaticCam" type="Camera3D" parent="CameraSelect"]
+transform = Transform3D(0.973046, 0, -0.23061, 0, 1, 0, 0.23061, 0, 0.973046, -1.65393, -0.0194352, 0.28144)
+
+[node name="Label3D" type="Label3D" parent="CameraSelect/StaticCam"]
+transform = Transform3D(0.826974, -0.0155689, -0.562028, 0.145195, 0.971623, 0.186726, 0.543172, -0.23602, 0.805768, 1.61363, -0.455184, -1.92684)
+text = "Press Spacebar to switch between fixed and moving camera. 
+Use arrow keys to move that camera."
+font_size = 8
+autowrap_mode = 2
+
+[node name="MovingCam" type="Camera3D" parent="CameraSelect"]
+transform = Transform3D(0.869831, 0, 0.49335, 0, 1, 0, -0.49335, 0, 0.869831, 2.59346, -0.0287998, 2.48497)
+current = true
+fov = 78.75
+script = ExtResource("3_53nmh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 5.96046e-08, 0, 5, 0, -5.96046e-08, 0, 5, -1.19209e-07, -0.0739756, 0)
+extra_cull_margin = 314.08
+custom_aabb = AABB(5, 0, 0, 5, 0, 0)
+mesh = SubResource("PlaneMesh_dbty3")
