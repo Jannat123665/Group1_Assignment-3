@@ -12,7 +12,8 @@ ________________________________________
 Jannat: 
 • Tasks:
     o  Set up the Git repository and create a planner. 
-    o  Create and set the rod at the top of pendulum 
+    o  Create and set the rod at the top of pendulum.
+    o  Debugging and Testing
     o Ensure everyone’s contributions are logged and write a README.md with task descriptions for each member. 
 
 ________________________________________
