@@ -59,8 +59,10 @@ func update_pendulum_positions():
 	# Set arm1 rotation to match angle1
 	arm1.rotation_degrees = Vector3(0, 0, angle1 * 180 / PI)
 
-	# Position arm2 exactly at bob1's position, so it connects properly
-	arm2.global_transform.origin = bob1.global_transform.origin + bob1_position
+	# Position arm2 at the bottom of bob1, instead of its center
+	# Adjust for the OFFSET and length of the bob
+	var bob1_bottom = bob1.global_transform.origin + Vector3(0, -OFFSET, 0)
+	arm2.global_transform.origin = bob1_bottom
 
 	# Calculate bob2 position based on angle2 and length2
 	var bob2_position = Vector3(length2 * sin(angle2), -length2 * cos(angle2), 0)

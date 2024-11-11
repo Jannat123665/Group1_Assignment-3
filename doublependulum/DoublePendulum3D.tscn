@@ -1,10 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtjel0b6hp2pa"]
+[gd_scene load_steps=16 format=3 uid="uid://dtjel0b6hp2pa"]
 
 [ext_resource type="Script" path="res://double_pendulum_3d.gd" id="1_ssp5r"]
+[ext_resource type="Texture2D" uid="uid://cp3ox54kxp7ny" path="res://vintage_measuring_lab_4k.exr" id="2_d2kf7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nialq"]
+albedo_color = Color(0.956148, 0.727423, 0.925723, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1h5y7"]
+material = SubResource("StandardMaterial3D_nialq")
 
-[sub_resource type="SphereMesh" id="SphereMesh_astre"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_b2ldy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4e6un"]
+albedo_color = Color(6.257e-06, 0.645932, 0.81286, 1)
+metallic = 0.47
+
+[sub_resource type="SphereMesh" id="SphereMesh_yeupg"]
+material = SubResource("StandardMaterial3D_4e6un")
+radial_segments = 67
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_n52f8"]
+height = 5.50138
+radius = 0.001
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_32bl6"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pmdlr"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_w67qi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xwc5k"]
+albedo_color = Color(0.227952, 0.744564, 0, 1)
+metallic = 0.51
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ff663"]
+panorama = ExtResource("2_d2kf7")
+
+[sub_resource type="Sky" id="Sky_haybp"]
+sky_material = SubResource("PanoramaSkyMaterial_ff663")
+
+[sub_resource type="Environment" id="Environment_lbm7i"]
+background_mode = 2
+sky = SubResource("Sky_haybp")
 
 [node name="DoublePendulum3d" type="Node3D"]
 script = ExtResource("1_ssp5r")
@@ -13,29 +50,58 @@ script = ExtResource("1_ssp5r")
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.000650167, 0, 0.00123072)
 
 [node name="String1" type="MeshInstance3D" parent="Arm1"]
-transform = Transform3D(9.55343e-18, 8.74228e-09, 0.005, 0.005, -8.74228e-09, 0, 2.18557e-10, 0.2, -2.18557e-10, 0.0012877, 1.00256, -0.000618279)
+transform = Transform3D(9.55343e-18, 8.74228e-09, 0.005, -0.000112302, 0.19995, -2.18502e-10, -0.00499874, -0.0044921, 4.9089e-12, 0.0012877, 0.984433, -0.000618279)
 mesh = SubResource("CylinderMesh_1h5y7")
 
-[node name="Bob2" type="MeshInstance3D" parent="Arm1"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 8.73115e-11, 0.767384, 1.01863e-09)
-mesh = SubResource("SphereMesh_astre")
-skeleton = NodePath("")
+[node name="Bob2" type="RigidBody3D" parent="Arm1"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00135343, 0.769489, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arm1/Bob2"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.239821, 0)
+shape = SubResource("SphereShape3D_b2ldy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arm1/Bob2"]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)
+mesh = SubResource("SphereMesh_yeupg")
+
+[node name="PinJoint3D" type="PinJoint3D" parent="Arm1/Bob2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00463247, 0)
+node_a = NodePath("..")
+node_b = NodePath("../../../Arm2/String2")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.571424, 4.32495)
+transform = Transform3D(0.0718628, 0, -0.997415, 0, 1, 0, 0.997415, 0, 0.0718628, -2.95006, 2.14799, 1.10596)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.571424, 4.32495)
 
 [node name="Arm2" type="Node3D" parent="."]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.00238586, -0.00603318, 0.00126172)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.00238586, 0.0431304, 0.00126172)
 
-[node name="String2" type="MeshInstance3D" parent="Arm2"]
-transform = Transform3D(0.005, 0, 0, 0, 0.2, 0, 0, 0, 0.005, 0.00154297, 0.551972, -0.00151759)
-sorting_use_aabb_center = false
-mesh = SubResource("CylinderMesh_1h5y7")
+[node name="String2" type="RigidBody3D" parent="Arm2"]
+transform = Transform3D(0.008, 0, 0, 0, 0.32, 0, 0, 0, 0.008, 0.00154297, 0.570605, -0.00151759)
 
-[node name="Bob2" type="MeshInstance3D" parent="Arm2"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00025527, 0.316794, -0.00089931)
-mesh = SubResource("SphereMesh_astre")
-skeleton = NodePath("")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arm2/String2"]
+transform = Transform3D(0.005, 0, 0, 0, 0.2, 0, 0, 0, 0.005, 0, 0, 0)
+shape = SubResource("CylinderShape3D_n52f8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arm2/String2"]
+transform = Transform3D(0.01, 0, 0, 0, 0.4, 0, 0, 0, 0.01, 0, -0.2493, 0)
+mesh = SubResource("CylinderMesh_32bl6")
+
+[node name="Bob2" type="RigidBody3D" parent="Arm2"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.00025527, 0.336639, -0.00089931)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arm2/Bob2"]
+shape = SubResource("SphereShape3D_pmdlr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arm2/Bob2"]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)
+mesh = SubResource("SphereMesh_w67qi")
+surface_material_override/0 = SubResource("StandardMaterial3D_xwc5k")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lbm7i")
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.340423, 0.403167, -0.849452, 0.0532692, 0.89369, 0.445511, 0.938762, -0.196912, 0.282757, -6.76325, 5.34435, 1.84863)
